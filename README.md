@@ -1,17 +1,17 @@
 # gocryptfs
 
-![Auto-bump gocryptfs](https://github.com/OJFord/docker-gocryptfs/workflows/Auto-bump%20gocryptfs/badge.svg)
-
-![Build & publish](https://github.com/OJFord/docker-gocryptfs/workflows/Build%20&%20publish/badge.svg)
-
 All credit for the file-system itself to rfjakob/gocryptfs.
+Based on docker-gocryptfs by https://github.com/OJFord/docker-gocryptfs
 
 ## Releases
 
 Image is available at:
 ```
-docker.io/ojford/gocryptfs
+docker.io/soluga/gocryptfs
 ```
+
+*BUILD/IMAGE currently not available. Need to fix Dockerfile somehow...*
+
 
 In addition to `latest`, tags are available as both:
 ```
@@ -38,23 +38,17 @@ Passphrase should be specified in:
 $GOCRYPTFS_PSWD
 ```
 
-CIPHERDIRs should be mounted under:
+Can be used to encrypt or decrypt your files.
 ```
-/crypts/
-```
-
-By default a flat structure is assumed, so that each first level directory should be a CIPHERDIR, instead, a list may be given at:
-```
-/etc/gocryptfs/crypts
+/encrypt/decrypted/<some dir> will be encrypted to /encrypt/encrypted/<some dir>
+/decrypt/encrypted/<some dir> will be decrypted to /decrypt/decrypted/<some dir>
 ```
 
-The decrypted file-systems will be mounted symmetrically at:
+Initialization of gocryptfs-config-file is automatically done if you provide
 ```
-/mnt/
+$AUTOINIT=true
 ```
-
-`fusermount -u` is *not* run automatically.
-
+Please be sure to check the logs upon first start (initialization) because the master-key will be printed there and should be writen down!
 
 ## Licence
 
