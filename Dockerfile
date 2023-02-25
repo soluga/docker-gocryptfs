@@ -5,7 +5,7 @@ RUN apk add bash gcc git libc-dev openssl-dev
 RUN go install github.com/rfjakob/gocryptfs@latest
 WORKDIR src/github.com/rfjakob/gocryptfs
 
-RUN git clone https://github.com/rfjakob/gocryptfs@latest
+RUN git clone https://github.com/rfjakob/gocryptfs
 RUN git checkout "$GOCRYPTFS_VERSION"
 RUN ./build.bash
 RUN mv "$(go env GOPATH)/bin/gocryptfs" /bin/gocryptfs
