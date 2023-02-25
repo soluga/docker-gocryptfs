@@ -50,6 +50,45 @@ $AUTOINIT=true
 ```
 Please be sure to check the logs upon first start (initialization) because the master-key will be printed there and should be writen down!
 
+## Docker compose
+```
+version: '3.8'
+services:
+  gocryptfs:
+    image: soluga/gocryptfs:latest
+    container_name: gocryptfs
+    privileged: true
+    stdin_open: true
+    tty: true
+    environment:
+      - GOCRYPTFS_PSWD=YourSecretPasswordGoesHere!
+      - AUTOINIT=true
+    
+    volumes:
+    - /docker_dev/gocryptfs:/new_dev
+    - type: bind
+      source: /gocryptfs/encrypt/decrypted/
+      target: /encrypt/decrypted/
+      bind:
+          propagation: rshared
+    - type: bind
+      source: /gocryptfs/encrypt/encrypted/
+      target: /encrypt/encrypted/
+      bind:
+          propagation: rshared
+
+    - type: bind
+      source: /gocryptfs/decrypt/encrypted/
+      target: /decrypt/encrypted/
+      bind:
+          propagation: rshared
+    - type: bind
+      source: /gocryptfs/decrypt/decrypted/
+      target: /decrypt/decrypted/
+      bind:
+          propagation: rshared
+```
+
 ## Licence
 
 MIT.
