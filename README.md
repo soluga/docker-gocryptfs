@@ -65,7 +65,6 @@ services:
       - AUTOINIT=true
     
     volumes:
-    - /docker_dev/gocryptfs:/new_dev
     - type: bind
       source: /gocryptfs/encrypt/decrypted/
       target: /encrypt/decrypted/
