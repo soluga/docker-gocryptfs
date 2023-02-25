@@ -1,8 +1,8 @@
 FROM golang:alpine AS builder
-ENV GOCRYPTFS_VERSION v2.3
+ENV GOCRYPTFS_VERSION v2.3.0
 
 RUN apk add bash gcc git libc-dev openssl-dev
-RUN go install github.com/rfjakob/gocryptfs
+RUN go get -d github.com/rfjakob/gocryptfs
 WORKDIR src/github.com/rfjakob/gocryptfs
 
 RUN git checkout "$GOCRYPTFS_VERSION"
